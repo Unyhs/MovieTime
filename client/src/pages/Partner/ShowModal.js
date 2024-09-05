@@ -22,7 +22,7 @@ function ShowModal({isShowModalOpen,setIsShowModalOpen,selectedTheatre,setSelect
 
     const getData=async()=>{
         try{
-
+            dispatch(showLoading())
             const movieResponse=await getAllMovies()
             if(movieResponse.success)
             {
@@ -41,8 +41,10 @@ function ShowModal({isShowModalOpen,setIsShowModalOpen,selectedTheatre,setSelect
             {
                 message.error(showResponse.message)
             }
+            dispatch(hideLoading())
         }catch(err){
             console.log(err.message)
+            dispatch(hideLoading())
         }
     }
 

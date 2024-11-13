@@ -49,7 +49,7 @@ const MovieForm = ({isModalOpen,setIsModalOpen,selectedMovie,setSelectedMovie,fo
     footer={null} >
       <Form layout="vertical" initialValues={{
           ...selectedMovie,
-          releaseDate: formType === 'Add' ? moment().format('YYYY-MM-DD') : selectedMovie?.releaseDate
+          releaseDate: formType === 'Add' ? moment().format('yyyy-MM-DD') : selectedMovie?.releaseDate
         }} onFinish={handleSubmit}>
         <Form.Item 
         label="Movie Name" 

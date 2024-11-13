@@ -71,11 +71,11 @@ function TheatreModal({isModalOpen,setIsModalOpen,formType,setFormType,selectedT
             <Form.Item 
             label="Phone Number" 
             name='phone'
-            rules={[{required:true,message:'Enter a valid 10 digit phone number'}]}>  
+            rules={[{required:true,message:'Enter a valid 10 digit phone number'}, 
+                {pattern: /^[0-9]{10}$/, 
+                message: 'Enter a valid 10 digit phone number'},]}>  
             <Input type="number" 
-            placeholder="Enter the business phone number"
-            min={1000000000}
-            max={9999999999} />
+            placeholder="Enter the business phone number"/>
             </Form.Item>
 
             <Form.Item 

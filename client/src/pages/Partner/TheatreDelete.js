@@ -58,6 +58,7 @@ function TheatreDelete({
     onCancel={onCancel}
     >
       <p>Are you sure you wish to delete this Theatre?</p>
+      <p>All corresponding shows ,if unbooked, will be deleted and cannot be reversed.</p>
     </Modal>
     }
     </>

@@ -43,10 +43,8 @@ function TheatresTable() {
 
   const handleStatusChange=async(theatre)=>{
     try{
-      console.log("handlechnage")
       dispatch(showLoading())
       const values={...theatre, isActive:!theatre.isActive}
-      console.log(values)
       const response=await updateTheatre(values)
       if(response.success)
       {
@@ -74,8 +72,8 @@ function TheatresTable() {
         <div>
         {
           data.isActive?
-          (<Button onClick={()=>{handleStatusChange(data)}}><CloseCircleOutlined /></Button>):
-          (<Button onClick={()=>{handleStatusChange(data)}}><CheckCircleOutlined /></Button>)
+          (<Button onClick={()=>{handleStatusChange(data)}}><CloseCircleOutlined />Block</Button>):
+          (<Button onClick={()=>{handleStatusChange(data)}}><CheckCircleOutlined />Approve</Button>)
         }
         </div>
     ))}

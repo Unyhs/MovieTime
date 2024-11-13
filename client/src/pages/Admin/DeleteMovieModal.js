@@ -50,6 +50,7 @@ const DeleteMovieModal = ({isDltModalOpen,setIsDltModalOpen,selectedMovie,setSel
     onOk={onOk}
     onCancel={onCancel}>
       <p>Are you sure you want to delete this movie?</p>
+      <p>The corresponding shows (if unbooked) shall be deleted and it cannot be reversed</p>
     </Modal>
     }
     </>

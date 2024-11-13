@@ -79,7 +79,7 @@ function Home() {
                       alt='movie poster' 
                       style={{marginBottom:'10px', cursor:'pointer', width:'200px', borderRadius:'8px'}}
                       onClick={()=>{
-                        navigate(`/movies/${ele._id}?data=${moment().format('DD-MM-YYYY')}`)
+                        navigate(`/movies/${ele._id}/${moment().format('YYYY-MM-DD')}`)
                         }}/>
                       <h3>{ele.title}</h3>
                     </div>

@@ -56,7 +56,7 @@ function TheatreList() {
                 backgroundColor:(data.isActive)? 'white' : 'lightgrey',
                 cursor: (data.isActive) ? 'pointer' : 'not-allowed'
             }}
-            ><PlusOutlined />Add Shows</Button>
+            >Manage Shows</Button>
             </>
         ))}
     ]
@@ -86,7 +86,7 @@ function TheatreList() {
     <div>
         
      <Table dataSource={theatres} columns={tablecols} />
-        <Button onClick={()=>{
+        <Button type='primary' onClick={()=>{
                 setFormType('Add')
                 setIsModalOpen(true)
         }}> <PlusOutlined /> Add Theatre</Button>

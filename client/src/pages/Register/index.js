@@ -5,7 +5,6 @@ import { registerUser } from '../../api/users'
 
 function Register() {
   const [activeTab,setActiveTab]=useState("user")
-  const form=Form.useForm()
 
   const handleTabChange=()=>{
     if(activeTab==="user")
@@ -20,7 +19,6 @@ function Register() {
       const response=await registerUser(newvalue)
       if(response.success){
         message.success(response.message)
-        form.resetFields()
       }else
       {
         message.error(response.message)
@@ -127,25 +125,31 @@ function Register() {
   return (
     <>
     <div style={{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      minHeight:'90vh'
+    }}>
+    <div style={{
       display:'flex', 
       flexDirection:'column',
       height:'450px',
       width:'400px',
       alignItems:'center',
       borderRadius:'30px',
-      margin:'50px 425px',
       boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)'
     }}>
-      <h2 style={{color:'black',padding:'10px'}}>Register to BookMyShow</h2>
+      <h2 style={{color:'black',padding:'10px'}}>Register to MovieTime</h2>
       <main style={{
         backgroundColor:'white', 
-        height:'50vh', 
-        width:'30vw', 
+        height:'30vh', 
+        width:'20vw', 
         display:'flex',
         flexDirection:'column',
         alignItems:'center'}}>
         <Tabs items={tabItems} onChange={handleTabChange}></Tabs>
       </main>
+    </div>
     </div>
     </>
   )

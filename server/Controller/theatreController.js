@@ -1,4 +1,5 @@
 const theatreModel=require('../models/theatreModel')
+const showModel=require('../models/showModel')
 
 const addTheatre=async(req,res)=>{
     try{
@@ -38,8 +39,21 @@ const updateTheatre=async(req,res)=>{
 
 const deleteTheatre=async(req,res)=>{
     try{
+        const shows=await showModel.find({theatre:req.params.theatreId})
+        if(shows.length>0)
+        {
+           const totalBookedSeats=shows.reduce((sum,ele)=>sum+ele.bookedSeats.length,0)
+           if(totalBookedSeats>0)
+           {
+                return res.send({success:false,message:"The theatre cannot be deleted now as tickets have been booked"})
+           }else
+           {
+                const showId=shows.map(show=>show._id)
+                await showModel.deleteMany({_id:{$in:showId}})
+           }
+        }
         await theatreModel.findByIdAndDelete(req.params.theatreId)
-        res.send({success:true,message:"The theatre has been deleted"})
+        res.send({success:true,message:"The theatre has been deleted along with the shows"})
     }catch(err)
     {
         return res.status(400).json({message:err.message})

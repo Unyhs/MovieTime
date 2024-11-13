@@ -28,6 +28,50 @@
   color: #61dafb;
 }
 
+.button-show{
+    cursor:pointer;
+    color:orange;
+    transition:all 0.1s ease-in;
+}
+
+.button-show:hover{
+  color: #fff !important;
+  background-color:lightsalmon !important
+}
+
+.seat-btn{
+  background-color: #f6f6f6;
+  border: 1px solid #a0a0a0;
+  width: 40px;
+  height: 35px;
+  text-align: center;
+  line-height: 1;
+  cursor: pointer;
+  font-size: 13px;
+  min-height: unset;
+  margin: 2px;
+}
+
+.seat-btn:hover{
+  border-color: black;
+  background-color:blue;
+  color:#fff
+}
+
+.seat-btn.selected{
+  color: #fff;
+  width: 40px;
+  height: 35px;
+  background-color:rgba(0, 128, 0, 0.511)
+}
+
+.seat-btn.booked{
+  background-color: #ddd;
+  color: #999;
+  border-color: #ddd;
+  cursor: not-allowed;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

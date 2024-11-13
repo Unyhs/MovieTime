@@ -36,17 +36,17 @@ export const getAllShowsByTheatreId=async(value)=>{
     }
 }
 
-export const getShowByShowId=async(value)=>{
+export const getShowByShowId=async(showId)=>{
     try{
-        const response=await axiosInstance.get(`/api/shows/getShowByShowId/${value.showId}`)
+        const response=await axiosInstance.get(`/api/shows/getShowByShowId/${showId}`)
         return response.data
     }catch(err){
         console.log(err)
     }
 }
-export const getAllShowsMoviesView=async({movie,date})=>{
+export const getAllShowsMoviesView=async(payload)=>{
     try{
-        const response=await axiosInstance.get(`/api/shows/getAllShowsMoviesView/${movie}/${date}`)
+        const response=await axiosInstance.get(`/api/shows/getAllShowsMoviesView/${payload.movie}/${payload.date}`)
         return response.data
     }catch(err){
         console.log(err)

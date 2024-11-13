@@ -33,7 +33,7 @@ function MovieList() {
     {title:"Duration", dataIndex:"duration",render:(text)=>`${text} mins`},
     {title:"Genre", dataIndex:"genre"},
     {title:"Language", dataIndex:"language"},
-    {title:"Release Date", dataIndex:"releaseDate",render:(text,data)=>(moment(data.releaseDate).format('DD-MM-YYYY'))},
+    {title:"Release Date", dataIndex:"releaseDate",render:(text,data)=>(moment(data.releaseDate).format('MMM Do YYYY'))},
     {title:"Action",render:(text,data)=>(
       <>
         <Button onClick={()=>{
@@ -77,13 +77,17 @@ function MovieList() {
     {(loader)? <Loader /> : 
     
     <div>
-      <Button onClick={()=>{
+      
+      <Table dataSource={movies} columns={tableHeaders} />
+
+      <Button 
+      type='primary'
+      onClick={()=>{
         setIsModalOpen(true)
         setFormType("Add")
       }}>
         Add Movie
       </Button>
-      <Table dataSource={movies} columns={tableHeaders} />
 
       {isModalOpen && (<MovieForm 
       isModalOpen={isModalOpen}

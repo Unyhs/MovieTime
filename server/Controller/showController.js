@@ -13,7 +13,8 @@ const addShow=async(req,res)=>{
 const deleteShow=async(req,res)=>{
     try{
         const show=await showModel.findById(req.params.showId)
-        if(!show) res.send({success:false,message:"No show exists for the given id"})
+        if(!show) return res.send({success:false,message:"No show exists for the given id"})
+        if(show.bookedSeats.length>0) return res.send({success:false,message:"The show cannot be deleted as tickets have been booked"})
         await showModel.findByIdAndDelete(req.params.showId)
         res.send({success:true,message:"The show corresponding to given Id has been deleted"})
     }catch(err){
@@ -34,7 +35,7 @@ const updateShow=async(req,res)=>{
 
 const getShowByShowId=async(req,res)=>{
     try{
-        const showId=req.params
+        const showId=req.params.showId
         const queryShow=await showModel.findById(showId).populate('movie').populate('theatre')
         res.send({
             success:true,
@@ -49,7 +50,6 @@ const getShowByShowId=async(req,res)=>{
 const getAllShowsByTheatreId=async(req,res)=>{
     try{
         const shows=await showModel.find({theatre:req.params.theatreId}).populate('movie')
-        console.log(shows)
         res.send({success:true,message:"All shows pertaining to given theatreId fetched",data:shows})
     }catch(err){
         return res.status(400).json({message:err.message})
@@ -59,18 +59,23 @@ const getAllShowsByTheatreId=async(req,res)=>{
 const getAllShowsMoviesView=async(req,res)=>{
     //will give all shows of a given movie on a particular date sorted by the theatre
     try{
-    const {currmovie,currdate}=req.params
+    const {movie,date}=req.params
     let uniqueTheatres=[]
-    const shows=await showModel.find({movie:currmovie,startDate:{$lte:currdate},endDate:{$gte:currdate}}).populate('movie')
-    shows.forEach(ele=>{
-        let isThere=uniqueTheatres.find(t=>{ele.theatre._id===t._id})
-        if(!isThere)
-        {
-            let showOfTheatres=shows.filter(s=>{s.theatre._id===ele.theatre._id})
-            uniqueTheatres.push({...ele.theatre._id,shows:showOfTheatres})
+    const shows=await showModel.find({movie:movie, date:date}).populate('theatre')
+    shows.forEach((show) => {
+        const isTheatre = uniqueTheatres.find(
+          (theatre) => theatre._id == show.theatre._id
+        );
+        if (!isTheatre) {
+          const showsOfTheatre = shows.filter(
+            (showObj) => showObj.theatre._id == show.theatre._id
+          );
+          uniqueTheatres.push({
+            ...show.theatre._doc,
+            shows: showsOfTheatre,
+          });
         }
-    })
-    console.log(uniqueTheatres)
+      });
     res.send({success:true,message:"All theatre shows pertaining to given movie fetched",data:uniqueTheatres})
     }catch(err)
     {

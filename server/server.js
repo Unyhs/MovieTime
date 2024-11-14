@@ -4,6 +4,9 @@ app.set('trust proxy', 'loopback');
 const rateLimit = require("express-rate-limit");
 const helmet=require('helmet')
 const mongoSanitize=require('express-mongo-sanitize')
+const path=require('path')
+const buildPath=path.join(__dirname,'../client/build')
+
 
 //DB Connection
 require ('dotenv').config()
@@ -18,6 +21,7 @@ const apiLimiter=rateLimit({
 })
 
 //middlewares
+app.use(express.static(buildPath))
 app.use(express.json())
 app.use(helmet())
 app.use(mongoSanitize())

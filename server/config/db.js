@@ -1,6 +1,5 @@
 const mongoose=require('mongoose')
 const dbURL=process.env.db_url;
-console.log(dbURL)
 
 const connectDB=async()=>{
     try{

@@ -4,7 +4,7 @@ export const axiosInstance=axios.create({
     headers:{
         "Content-Type":"application/json",
     },
-    baseURL:'/'
+    baseURL:'https://movietime-qocg.onrender.com'
 })
 
 axiosInstance.interceptors.request.use(function(config){

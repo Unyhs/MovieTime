@@ -1,6 +1,6 @@
 const express=require('express')
 const app=express()
-app.set('trust proxy', 'loopback');
+//app.set('trust proxy', 'loopback');
 const rateLimit = require("express-rate-limit");
 const helmet=require('helmet')
 const mongoSanitize=require('express-mongo-sanitize')
@@ -27,9 +27,9 @@ app.use(cors({
     allowedHeaders:['Content-Type','Authorization'],
 })) 
 app.use(express.static(buildPath))
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(buildPath,'index.html'))
-})
+// app.get('*',(req,res)=>{
+//     res.sendFile(path.join(buildPath,'index.html'))
+// })
 
 app.use(express.json())
 app.use(helmet())
